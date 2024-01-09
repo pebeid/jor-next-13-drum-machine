@@ -1,16 +1,19 @@
 'use client';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Volume2, VolumeX } from 'react-feather';
 
 import VisuallyHidden from '../VisuallyHidden';
 import MaxWidthWrapper from '../MaxWidthWrapper';
 import styles from './Header.module.css';
+import VolumeContextProvider from '../VolumeEnabled/VolumeEnabled';
 
 function Header() {
   const id = React.useId();
 
   // TODO: Global state?
-  const soundEnabled = true;
+  const volumeState = useContext(VolumeContextProvider);
+  console.log(volumeState);
+  const soundEnabled = volumeState.volumeEnabled;
 
   return (
     <header className={styles.wrapper}>
@@ -22,6 +25,7 @@ function Header() {
         <button
           onClick={() => {
             // TODO: flip `soundEnabled`
+            // setVolumeState({volumeEnabled: !volumeEnabled});
           }}
         >
           {soundEnabled ? (
